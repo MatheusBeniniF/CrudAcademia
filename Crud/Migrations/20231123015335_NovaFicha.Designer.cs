@@ -3,6 +3,7 @@ using System;
 using CrudApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crud.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231123015335_NovaFicha")]
+    partial class NovaFicha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -27,7 +30,6 @@ namespace Crud.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FichaId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Intervalo")
@@ -43,7 +45,7 @@ namespace Crud.Migrations
 
                     b.HasIndex("FichaId");
 
-                    b.ToTable("ExercicioRecords");
+                    b.ToTable("ExercicioRecord");
                 });
 
             modelBuilder.Entity("Crud.Models.Ficha", b =>
@@ -279,9 +281,7 @@ namespace Crud.Migrations
                 {
                     b.HasOne("Crud.Models.Ficha", null)
                         .WithMany("Exercicios")
-                        .HasForeignKey("FichaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FichaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

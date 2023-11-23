@@ -16,7 +16,7 @@ public class UsuarioController : ControllerBase
         this.userManager = userManager;
         this.signInManager = signInManager;
         this.authService = authService;
-        this.roleManager = roleManager;
+        this.roleManager = roleManager; 
     }
 
     [HttpPost("Criar")]
