@@ -9,6 +9,7 @@ namespace CrudApi.Models
         public DbSet<UserInfo> UserInfo { get; set; } = null!;
         public DbSet<Ficha> Fichas { get; set; } = null!;
         public DbSet<ExercicioRecord> ExercicioRecords { get; set; } = null!;
+        public DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

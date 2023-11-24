@@ -7,43 +7,43 @@ namespace Crud.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class NovaFichaController : ControllerBase
+public class NewUsuario : ControllerBase
 {
-    public NovaFichaController(ApplicationDbContext db) =>
+    public NewUsuario(ApplicationDbContext db) =>
         this.db = db;
 
-    // GET: api/Ficha
+    // GET: api/Usuario
     [HttpGet]
-    public ActionResult<IEnumerable<Ficha>> Get()
+    public ActionResult<IEnumerable<Usuario>> Get()
     {
-        if (db.Fichas == null)
+        if (db.Usuarios == null)
             return NotFound("Nenhuma ficha cadastrada.");
 
-        return db.Fichas;
+        return db.Usuarios;
     }
 
-    // GET: api/Ficha/5
+    // GET: api/Usuario/5
     [HttpGet("{id}")]
-    public ActionResult<Ficha> GetId(int id)
+    public ActionResult<Usuario> GetId(int id)
     {
-        var obj = db.Fichas.FirstOrDefault(x => x.Id == id);
+        var obj = db.Usuarios.FirstOrDefault(x => x.Id == id);
 
         if (obj == null)
-            return NotFound("N�o foi encontrado nenhuma ficha com o identificador informado.");
+            return NotFound("N�o foi encontrado nenhum usuario com o identificador informado.");
 
         return obj;
     }
 
-    // POST: api/Ficha
-    [HttpPost("Ficha")]
-    public ActionResult<Ficha> Post(Ficha obj)
+    // POST: api/Usuario
+    [HttpPost("Usuario")]
+    public ActionResult<Usuario> Post(Usuario obj)
     {
         if (obj.Id == null || obj.Id == 0)
         {
             obj.Id = Convert.ToInt32(Guid.NewGuid().ToString("N").Substring(0, 8), 16);
         }
 
-        db.Fichas.Add(obj);
+        db.Usuarios.Add(obj);
         db.SaveChanges();
 
         return CreatedAtAction(
@@ -53,33 +53,32 @@ public class NovaFichaController : ControllerBase
         );
     }
 
-
-    // PUT: api/Ficha/5
+    // PUT: api/Usuario/5
     [HttpPut("{id}")]
-    public IActionResult Put(int id, Ficha obj)
+    public IActionResult Put(int id, Usuario obj)
     {
         if (id != obj.Id)
             return BadRequest("O identificador informado difere do identificador do objeto");
 
-        db.Fichas.Update(obj);
+        db.Usuarios.Update(obj);
         db.SaveChanges();
 
         return NoContent();
     }
 
-    // DELETE: api/Ficha/5
+    // DELETE: api/Usuario/5
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        if (db.Fichas == null)
-            return NotFound("Nenhuma ficha cadastrada.");
+        if (db.Usuarios == null)
+            return NotFound("Nenhum usuario cadastrado.");
 
-        var obj = db.Fichas.FirstOrDefault(x => x.Id == id);
+        var obj = db.Usuarios.FirstOrDefault(x => x.Id == id);
 
         if (obj == null)
-            return NotFound("N�o foi encontrado nenhuma ficha com o identificador informado.");
+            return NotFound("N�o foi encontrado nenhum usuario com o identificador informado.");
 
-        db.Fichas.Remove(obj);
+        db.Usuarios.Remove(obj);
         db.SaveChanges();
 
         return NoContent();

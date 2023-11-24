@@ -14,7 +14,7 @@ public class ExercicioRecordController : ControllerBase
         
     // GET: api/ExercicioRecord/5
     [HttpGet("{id}")]
-    public ActionResult<ExercicioRecord> GetId(string id)
+    public ActionResult<ExercicioRecord> GetId(int id)
     {
         var obj = db.ExercicioRecords.FirstOrDefault(x => x.Id == id);
 
@@ -37,7 +37,7 @@ public class ExercicioRecordController : ControllerBase
 
     // DELETE: api/ExercicioRecord/5
     [HttpDelete("{id}")]
-    public IActionResult Delete(string id)
+    public IActionResult Delete(int id)
     {
         if (db.ExercicioRecords == null)
             return NotFound("Nenhum record cadastrado.");
