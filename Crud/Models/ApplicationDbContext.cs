@@ -17,7 +17,7 @@ namespace CrudApi.Models
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            options.UseSqlite($"Data Source={System.IO.Path.Join(path, "dumbFit.db")}");
+            options.UseSqlite($"Data Source={System.IO.Path.Join(path, "dumbFit2.db")}");
         }
     }
 }

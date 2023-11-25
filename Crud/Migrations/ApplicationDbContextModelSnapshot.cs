@@ -23,6 +23,9 @@ namespace Crud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Carga")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Exercicio")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -90,6 +93,9 @@ namespace Crud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -101,6 +107,9 @@ namespace Crud.Migrations
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool?>("TemFicha")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

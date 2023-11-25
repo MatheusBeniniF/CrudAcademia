@@ -52,6 +52,18 @@ public class ExercicioRecordController : ControllerBase
 
         return NoContent();
     }
+    
+    // PUT: api/ExercicioRecord/5
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, ExercicioRecord obj)
+    {
+        if (id != obj.Id)
+            return BadRequest("O identificador informado difere do identificador do objeto");
 
+        db.ExercicioRecords.Update(obj);
+        db.SaveChanges();
+
+        return NoContent();
+    }
     private readonly ApplicationDbContext db;
 }

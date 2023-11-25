@@ -51,18 +51,62 @@ namespace Crud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cadastros",
+                name: "Fichas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: false),
+                    User = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fichas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequerirNovaFichas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
-                    Role = table.Column<string>(type: "TEXT", nullable: false)
+                    PersonalEmail = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cadastros", x => x.Id);
+                    table.PrimaryKey("PK_RequerirNovaFichas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Role = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    TemFicha = table.Column<bool>(type: "INTEGER", nullable: true),
+                    DataCriacao = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,6 +215,30 @@ namespace Crud.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ExercicioRecords",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FichaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Exercicio = table.Column<string>(type: "TEXT", nullable: false),
+                    Carga = table.Column<string>(type: "TEXT", nullable: true),
+                    Intervalo = table.Column<int>(type: "INTEGER", nullable: false),
+                    QtdSeries = table.Column<int>(type: "INTEGER", nullable: false),
+                    Repeticoes = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExercicioRecords", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExercicioRecords_Fichas_FichaId",
+                        column: x => x.FichaId,
+                        principalTable: "Fichas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -207,6 +275,11 @@ namespace Crud.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExercicioRecords_FichaId",
+                table: "ExercicioRecords",
+                column: "FichaId");
         }
 
         /// <inheritdoc />
@@ -228,13 +301,25 @@ namespace Crud.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cadastros");
+                name: "ExercicioRecords");
+
+            migrationBuilder.DropTable(
+                name: "RequerirNovaFichas");
+
+            migrationBuilder.DropTable(
+                name: "UserInfo");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Fichas");
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crud.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231122015450_Inicial")]
+    [Migration("20231125144551_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -20,11 +20,84 @@ namespace Crud.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
 
-            modelBuilder.Entity("Crud.Models.Cadastro", b =>
+            modelBuilder.Entity("Crud.Models.ExercicioRecord", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Carga")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Exercicio")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("FichaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Intervalo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("QtdSeries")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Repeticoes")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FichaId");
+
+                    b.ToTable("ExercicioRecords");
+                });
+
+            modelBuilder.Entity("Crud.Models.Ficha", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fichas");
+                });
+
+            modelBuilder.Entity("Crud.Models.RequerirNovaFicha", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PersonalEmail")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RequerirNovaFichas");
+                });
+
+            modelBuilder.Entity("Crud.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -38,9 +111,12 @@ namespace Crud.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool?>("TemFicha")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Cadastros");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -235,6 +311,34 @@ namespace Crud.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("UserInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserInfo");
+                });
+
+            modelBuilder.Entity("Crud.Models.ExercicioRecord", b =>
+                {
+                    b.HasOne("Crud.Models.Ficha", null)
+                        .WithMany("Exercicios")
+                        .HasForeignKey("FichaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -284,6 +388,11 @@ namespace Crud.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Crud.Models.Ficha", b =>
+                {
+                    b.Navigation("Exercicios");
                 });
 #pragma warning restore 612, 618
         }
