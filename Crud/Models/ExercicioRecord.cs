@@ -8,4 +8,5 @@ public class ExercicioRecord
     public int Intervalo { get; set; }
     public int QtdSeries { get; set; }
     public int Repeticoes { get; set; }
+    public string? Anotacoes { get; set; } = "";
 }
