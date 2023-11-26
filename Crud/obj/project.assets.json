@@ -2330,19 +2330,19 @@
     ]
   },
   "packageFolders": {
-    "/home/murilo/.nuget/packages/": {}
+    "/Users/matheusbeniniferreira/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/murilo/vianna/CrudAcademia/Crud/Crud.csproj",
+      "projectUniqueName": "/Users/matheusbeniniferreira/estudos/devMobile/CrudAcademia/Crud/Crud.csproj",
       "projectName": "Crud",
-      "projectPath": "/home/murilo/vianna/CrudAcademia/Crud/Crud.csproj",
-      "packagesPath": "/home/murilo/.nuget/packages/",
-      "outputPath": "/home/murilo/vianna/CrudAcademia/Crud/obj/",
+      "projectPath": "/Users/matheusbeniniferreira/estudos/devMobile/CrudAcademia/Crud/Crud.csproj",
+      "packagesPath": "/Users/matheusbeniniferreira/.nuget/packages/",
+      "outputPath": "/Users/matheusbeniniferreira/estudos/devMobile/CrudAcademia/Crud/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/murilo/.nuget/NuGet/NuGet.Config"
+        "/Users/matheusbeniniferreira/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -2418,7 +2418,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.114/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
       }
     }
   }
